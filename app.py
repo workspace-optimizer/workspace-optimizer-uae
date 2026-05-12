@@ -1,66 +1,65 @@
 import streamlit as st
-import time
+from fpdf import FPDF
+import random
 
-st.set_page_config(page_title="WorkSpace Optimizer AI", page_icon="🏢", layout="wide")
+# إعداد واجهة الموقع بروح احترافية
+st.set_page_config(page_title="Workspace Optimizer AI - Gulf Edition", page_icon="🏗️")
 
-st.title("🏢 محول المكاتب المنزلية الذكي")
-st.markdown("---")
+st.title("🏗️ مهندس المساحات الذكي (نسخة الخليج)")
+st.subheader("حول زاوية منزلك إلى مكتب تنفيذي احترافي في دقيقة")
 
-# تقسيم الصفحة لعمودين لشكل أكثر احترافية
-col1, col2 = st.columns([1, 1])
+# مدخلات المستخدم
+uploaded_file = st.file_uploader("ارفع صورة الزاوية أو الغرفة", type=["jpg", "jpeg", "png"])
+budget = st.select_slider("حدد ميزانيتك التقريبية (بالدرهم الإماراتي/الريال السعودي)", 
+                         options=["اقتصادية", "متوسطة", "فاخرة"])
+style = st.selectbox("اختر نمط التصميم", ["عصري (Modern)", "كلاسيكي (Classic)", "صناعي (Industrial)"])
 
-with col1:
-    st.header("1️⃣ المدخلات")
-    uploaded_file = st.file_uploader("ارفع صورة الزاوية", type=["jpg", "png"])
-    budget = st.slider("ميزانيتك للأثاث ($)", 100, 2000, 500)
-    style = st.selectbox("نمط الديكور المفضل", ["Modern - عصري", "Minimalist - بسيط", "Classic - كلاسيك"])
-
-with col2:
-    st.header("2️⃣ المعاينة")
-    if uploaded_file:
-        st.image(uploaded_file, caption="مساحتك الحالية", use_container_width=True)
-    else:
-        st.info("في انتظار رفع الصورة...")
-
-st.markdown("---")
-
-if st.button("🚀 توليد خطة التصميم الاحترافية"):
-    if uploaded_file:
-        # محاكاة عملية التحليل بالذكاء الاصطناعي
-        with st.status("جاري فحص أبعاد الغرفة وتوزيع الإضاءة...", expanded=True) as status:
-            st.write("🔍 جاري التعرف على العناصر المعمارية...")
-            time.sleep(2)
-            st.write("💡 جاري حساب زوايا الضوء الطبيعي...")
-            time.sleep(2)
-            st.write("🛒 جاري مطابقة الميزانية مع المنتجات المتاحة...")
-            time.sleep(1)
-            status.update(label="تم التحليل بنجاح!", state="complete", expanded=False)
-
-        # عرض النتائج بشكل احترافي
-        st.success("✅ التقرير الهندسي جاهز")
+if uploaded_file and st.button("🚀 توليد التقرير الهندسي والمخطط"):
+    with st.spinner('جاري تحليل المساحة هندسياً وتوزيع الإضاءة...'):
         
-        tab1, tab2, tab3 = st.tabs(["📋 خطة التنفيذ", "🛒 قائمة المشتريات", "🎨 الألوان والإضاءة"])
+        # محاكاة ذكاء اصطناعي للتحليل (سيتم ربطه بـ API لاحقاً)
+        report_id = random.randint(1000, 9999)
         
-        with tab1:
-            st.write("### خطوات تحويل المكان:")
-            st.write("1. قم بإخلاء الزاوية اليمنى تماماً.")
-            st.write(f"2. ضع المكتب بزاوية 90 درجة مع النافذة لتجنب انعكاس الضوء (حسب نمط {style}).")
-            st.write("3. استخدم رفوفاً جدارية لاستغلال المساحة الرأسية.")
-            
-        with tab2:
-            st.write("### المشتريات المقترحة (ضمن ميزانية {} $):".format(budget))
-            # إنشاء جدول مشتريات
-            st.table({
-                "المنتج": ["مكتب عمل", "كرسي مريح", "مصباح مكتبي", "منظم أسلاك"],
-                "المصدر": ["IKEA", "Amazon", "Local Store", "IKEA"],
-                "السعر التقريبي": [f"{budget*0.4}$", f"{budget*0.3}$", f"{budget*0.1}$", "15$"]
-            })
-            
-        with tab3:
-            st.write("### توصيات الألوان:")
-            st.color_picker("لون الحائط المقترح", "#F0F2F6")
-            st.write("أكواد الإضاءة: 4000K (Natural White) للتركيز العالي.")
-            
-    else:
-        st.error("من فضلك ارفع صورة الزاوية أولاً لبدء التحليل.")
-    
+        # محتوى التقرير (هندسة اقتصادية)
+        analysis_text = f"""
+        REPORT ID: {report_id}
+        TARGET MARKET: GULF REGION (UAE/KSA)
+        
+        1. التحليل الهندسي للمساحة:
+        - توزيع الإضاءة: يوصى بوضع المكتب بزاوية 90 درجة من النافذة لتجنب الوهج.
+        - بيئة العمل: المقاس المثالي للمكتب في هذه المساحة هو 120x60 سم.
+        
+        2. قائمة التجهيزات المقترحة (متاجر الخليج):
+        - المكتب: ايكيا (تارفا) أو أبيات (سلسلة أوفيس).
+        - الكرسي: ماركة هيرمان ميلر (للفاخرة) أو هوم بوكس (للاقتصادية).
+        - الإضاءة: مصباح طاولة ذكي من أمازون الإمارات.
+        
+        3. نصيحة الإنتاجية:
+        - عزل الصوت باستخدام لوحات امتصاص في الزاوية لزيادة التركيز في اجتماعات Zoom.
+        """
+        
+        st.success("تم الانتهاء من التحليل!")
+        st.info(analysis_text)
+        
+        # إنشاء ملف PDF احترافي
+        pdf = FPDF()
+        pdf.add_page()
+        pdf.set_font("Arial", size=12)
+        pdf.cell(200, 10, txt="Professional Workspace Analysis - Gulf Edition", ln=True, align='C')
+        pdf.ln(10)
+        pdf.multi_cell(0, 10, txt=analysis_text)
+        
+        pdf_output = f"Report_{report_id}.pdf"
+        pdf.output(pdf_output)
+        
+        with open(pdf_output, "rb") as file:
+            st.download_button(
+                label="📥 تحميل التقرير الهندسي (PDF)",
+                data=file,
+                file_name=f"Workspace_Plan_{report_id}.pdf",
+                mime="application/pdf"
+            )
+            st.balloons()
+
+st.markdown("---")
+st.caption("هذا النظام مدعوم بالذكاء الاصطناعي لخدمة المبدعين في الخليج العربي.")
